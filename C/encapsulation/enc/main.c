@@ -13,6 +13,14 @@ int main(int argc, char * argv[]){
 	}
 	date_set_month(today, 7);
 	print_date(today);
+	//free memory
+	//free(today);
+	date_destroy(&today);
+	//dangling pointers
+	//today = NULL;
+	if (today == NULL) {
+		printf("DONE\n");
+	}
 	return 0;
 }
 

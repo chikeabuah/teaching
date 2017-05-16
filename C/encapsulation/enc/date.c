@@ -51,3 +51,11 @@ Status date_set_day(DATE hDate, int day){
 Status date_set_year(DATE hDate, int year){
 	return FAILURE;
 }
+
+void date_destroy(DATE* phDate) {
+	DatePtr pDate = (DatePtr) *phDate;
+
+	free(pDate);
+	*phDate = NULL;
+
+}
