@@ -32,8 +32,8 @@ DATE date_init_default(void) {
 
 	}
 
-	//objet or null
-	return pDate;
+	//object or null
+	return (DATE)pDate;
 }
 
 Status date_set_month(DATE hDate, int month){
