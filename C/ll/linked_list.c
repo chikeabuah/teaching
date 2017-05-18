@@ -58,15 +58,6 @@ NODE* add(NODE* node, DATA data) {
     return temp;
 }
 
-void add_at(NODE* node, DATA data) {
-    NODE* temp = (NODE*) malloc(sizeof (NODE));
-    if (temp == NULL) {
-        exit(EXIT_FAILURE); // no memory available
-    }
-    temp->data = data;
-    temp->next = node->next;
-}
-
 void remove_node(NODE* head) {
     NODE* temp = (NODE*) malloc(sizeof (NODE));
     if (temp == NULL) {
@@ -156,8 +147,6 @@ int main() {
     remove_node(node);
     printf("\nAdd Element To The List:\n");
     node = head->next->next->next;
-    element.info = 2000;
-    add_at(node, element);
     head = reverse(head); // Revers The List
     head = sort_list(head); // Sort The List
     head = free_list(head);
