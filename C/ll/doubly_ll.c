@@ -47,6 +47,9 @@ void InsertAtTail(int x) {
 	newNode->prev = temp;
 }
 
+//Delete Node from Doubly linked list
+//????
+
 //Prints all the elements in linked list in forward traversal order
 void Print() {
 	struct Node* temp = head;
