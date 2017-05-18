@@ -55,8 +55,7 @@ NODE* add(NODE* node, DATA data) {
     }
     temp->data = data;
     temp->next = node;
-    node = temp;
-    return node;
+    return temp;
 }
 
 void add_at(NODE* node, DATA data) {
@@ -66,7 +65,6 @@ void add_at(NODE* node, DATA data) {
     }
     temp->data = data;
     temp->next = node->next;
-    node->next = temp;
 }
 
 void remove_node(NODE* head) {
@@ -74,7 +72,10 @@ void remove_node(NODE* head) {
     if (temp == NULL) {
         exit(EXIT_FAILURE); // no memory available
     }
+    // copy next node's info to given node
+    // delete next node
     temp = head->next;
+    head->data = head->next->data;
     head->next = head->next->next;
     free(temp);
 }
@@ -131,6 +132,10 @@ NODE *sort_list(NODE *head) {
     }
     return tmpPtr;
 }
+
+// merge a linked list into another at alternate positions
+// check if a singly linked list is a palindrome
+// remove duplicate elements from a sorted linked list
 
 int main() {
     int i;
