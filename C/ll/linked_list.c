@@ -36,20 +36,22 @@ typedef struct {
 typedef struct node {
     DATA data;
     struct node* next;
-} NODE;
+} Node;
 
-void init(NODE** head) {
-    *head = NULL;
+void init(Node** head, DATA data) {
+    *head = (Node*)malloc(sizeof (Node));
+    (*head)->data = data;
+    (*head)->next = NULL;
 }
 
-void print_list(NODE* head) {
-    NODE * temp;
+void print_list(Node* head) {
+    Node * temp;
     for (temp = head; temp; temp = temp->next)
         printf("%5d", temp->data.info);
 }
 
-NODE* add(NODE* node, DATA data) {
-    NODE* temp = (NODE*) malloc(sizeof (NODE));
+Node* add(Node* node, DATA data) {
+    Node* temp = (Node*) malloc(sizeof (Node));
     if (temp == NULL) {
         exit(0); // no memory available
     }
@@ -58,8 +60,8 @@ NODE* add(NODE* node, DATA data) {
     return temp;
 }
 
-void remove_node(NODE* head) {
-    NODE* temp = (NODE*) malloc(sizeof (NODE));
+void remove_node(Node* head) {
+    Node* temp = (Node*) malloc(sizeof (Node));
     if (temp == NULL) {
         exit(EXIT_FAILURE); // no memory available
     }
@@ -71,21 +73,9 @@ void remove_node(NODE* head) {
     free(temp);
 }
 
-NODE * reverse_rec(NODE * ptr, NODE * previous) {
-    NODE * temp;
-    if (ptr->next == NULL) {
-        ptr->next = previous;
-        return ptr;
-    } else {
-        temp = reverse_rec(ptr->next, ptr);
-        ptr->next = previous;
-        return temp;
-    }
-}
-
-NODE * reverse(NODE * node) {
-    NODE * temp;
-    NODE * previous = NULL;
+Node * reverse(Node * node) {
+    Node * temp;
+    Node * previous = NULL;
     while (node != NULL) {
         temp = node->next;
         node->next = previous;
@@ -95,9 +85,9 @@ NODE * reverse(NODE * node) {
     return previous;
 }
 
-NODE *free_list(NODE *head) {
-    NODE *tmpPtr = head;
-    NODE *followPtr;
+Node *free_list(Node *head) {
+    Node *tmpPtr = head;
+    Node *followPtr;
     while (tmpPtr != NULL) {
         followPtr = tmpPtr;
         tmpPtr = tmpPtr->next;
@@ -106,8 +96,8 @@ NODE *free_list(NODE *head) {
     return NULL;
 }
 
-NODE *sort_list(NODE *head) {
-    NODE *tmpPtr = head, *tmpNxt = head->next;
+Node *sort_list(Node *head) {
+    Node *tmpPtr = head, *tmpNxt = head->next;
     DATA tmp;
     while (tmpNxt != NULL) {
         while (tmpNxt != tmpPtr) {
@@ -130,11 +120,12 @@ NODE *sort_list(NODE *head) {
 
 int main() {
     int i;
-    NODE* head;
-    NODE* node;
+    Node* head;
+    Node* node;
     DATA element;
+    element.info = 52;
     printf("Add Elements to List:\n");
-    init(&head);
+    init(&head, element);
     for (i = 53; i <= 63; i++) {
         element.info = i;
         printf("Add Element %2d To The List.\n", element.info);
